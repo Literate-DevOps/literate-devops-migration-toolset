@@ -1,2 +1,3 @@
 * literate-devops-migration-toolset
 Literate DevOps Migration Toolset provides utilities and documentation to facilitate migrating projects over to the Literate Programing paradigm. 
+- [[file:generic-file-migration-workflow.org][Generic Workflow for Migrating Files into org-mode Outline]]
