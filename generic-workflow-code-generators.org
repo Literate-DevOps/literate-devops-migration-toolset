@@ -1,4 +1,4 @@
-#+TITLE: Generic Workflow for Migration of Projects Created by Code Generation Utilities
+#+TITLE: Generic Workflow for Migrating Files into org-mode Outline
 
 * Summary
 
