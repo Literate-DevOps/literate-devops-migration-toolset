@@ -110,6 +110,8 @@ The list of files should be added as a named table or generated automatically as
 
    If the contents of the original file are not the same, troubleshoot the migration steps. The most common reason is that a blank line was unintentionally added or deleted while inserting the file contents into the =src= block.   
 
+   If the cause is not obvious, please read the [[file:file-migration-workarounds.org][File Migration Workarounds]] before submitting an issue.  
+
 *** Migration Workflow Automation                                :noexport:
 
 For this example, we'll use a named =src= block written in =elisp=. In practice, I encourage you to use the language you prefer. To date, there are over 30 supported programming languages.
