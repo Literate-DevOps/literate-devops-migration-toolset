@@ -4,6 +4,77 @@
 
 Many development tools provide code generation utilities for quickly creating the files and directories used by developers. This document will provide a generic workflow to migrate the existing files into an =org-mode= outline where the contents of the external files will be maintained using the Literate Programming paradigm.
 
+* Workflow
+
+** Create a dedicated =org-mode= file
+
+For this example, let's use the current file as the dedicated =org-mode= file.
+
+** Create a list of files that will migrated into dedicated =org-mode= file
+
+The list of files should be added as a named table or generated automatically as results from a named code block.
+
+  - For example, the org syntax for a table named =file-list-table= which contains =.gitignore=, =LICENSE=, and =README.org=.
+
+    #+BEGIN_SRC org :exports code :results drawer replace 
+
+      ,#+NAME: file-list-table
+      | Files      |
+      |------------|
+      | .gitignore |
+      | LICENSE    |
+      | README.org |
+
+
+   #+END_SRC
+
+   #+RESULTS:
+   :RESULTS:
+
+   #+NAME: file-list-table
+   | Files      |
+   |------------|
+   | .gitignore |
+   | LICENSE    |
+   | README.org |
+
+   :END:
+
+   #+BEGIN_QUOTE
+     *Note:* Using the ~#+NAME:~ syntax will allow table data or the results from a =SRC= code block to be used as input for other steps in this workflow.
+   #+END_QUOTE
+
+** Create =SRC= code block to process the list of files into an =org-mode= outline
+
+For this example, we'll use a named =SRC= code block written in =elisp=. In practice, I encourage you to use the language you prefer. To date, there are over 30 supported programming languages.
+
+#+BEGIN_SRC org :exports code :results drawer replace 
+
+  ,#+NAME: process-files-into-org-syntax
+  ,#+BEGIN_SRC elisp :var files=file-list-table
+    files
+  ,#+END_SRC
+
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+#+NAME: process-files-into-org-syntax
+#+BEGIN_SRC elisp :var files=file-list-table
+  files
+#+END_SRC
+
+#+RESULTS: process-files-into-org-syntax
+| .gitignore |
+| LICENSE    |
+| README.org |
+
+:END:
+
+
+
 * Export Settings                                                  :noexport:
 
 #+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:{} arch:headline
