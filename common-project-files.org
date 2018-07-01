@@ -15,7 +15,7 @@ Use this file to manage the files listed in the table below:
 
 * Common Project Files 
 
-** [[file:README.org][README.org]] file
+** [[file:README.org][README.org]]
 :PROPERTIES:
 :ID:       12162C15-FB1D-4748-B376-9433FFB50D79
 :END:
@@ -27,7 +27,7 @@ Use this file to manage the files listed in the table below:
   - [[file:generic-file-migration-workflow.org][Generic Workflow for Migrating Files into org-mode Outline]]
 #+END_SRC
 
-** [[file:.gitignore][.gitignore]] file
+** [[file:.gitignore][.gitignore]]
 :PROPERTIES:
 :ID:       ECBD2FC2-E1F1-41C5-8D92-4F2F31EA56C0
 :END:
@@ -48,7 +48,7 @@ Use this file to manage the files listed in the table below:
 
 #+END_SRC
 
-** [[file:LICENSE][LICENSE]] file
+** [[file:LICENSE][LICENSE]]
 :PROPERTIES:
 :ID:       2E04761F-4F3C-43F5-8BB3-47C01232184F
 :END:
