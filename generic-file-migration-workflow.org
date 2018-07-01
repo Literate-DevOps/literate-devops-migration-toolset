@@ -8,7 +8,7 @@ Many development tools provide code generation utilities for quickly creating th
 
 ** Create a dedicated =org-mode= file
 
-For this example, let's use the [[common-project-files.org]] as the dedicated =org-mode= file.
+For this example, let's use [[file:common-project-files.org][common-project-files.org]] as the dedicated =org-mode= file.
 
 ** Create a list of files that will migrated into dedicated =org-mode= file
 
