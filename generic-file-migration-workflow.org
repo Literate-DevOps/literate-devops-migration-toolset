@@ -18,15 +18,12 @@ The list of files should be added as a named table or generated automatically as
     
     #+NAME: create-file-list-table
     #+BEGIN_SRC org :exports code :results drawer replace 
-
       ,#+NAME: file-list-table
       | Files      |
       |------------|
       | .gitignore |
       | LICENSE    |
       | README.org |
-
-
    #+END_SRC
 
    #+BEGIN_QUOTE
