@@ -15,7 +15,8 @@ For this example, let's use the current file as the dedicated =org-mode= file.
 The list of files should be added as a named table or generated automatically as results from a named code block.
 
   - For example, the org syntax for a table named =file-list-table= which contains =.gitignore=, =LICENSE=, and =README.org=.
-
+    
+    #+NAME: create-file-list-table
     #+BEGIN_SRC org :exports code :results drawer replace 
 
       ,#+NAME: file-list-table
@@ -28,7 +29,9 @@ The list of files should be added as a named table or generated automatically as
 
    #+END_SRC
 
-   #+RESULTS:
+   Below is the =file-list-table=.
+
+   #+RESULTS: create-file-list-table
    :RESULTS:
 
    #+NAME: file-list-table
