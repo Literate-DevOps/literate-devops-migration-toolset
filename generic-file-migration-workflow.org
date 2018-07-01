@@ -29,25 +29,72 @@ The list of files should be added as a named table or generated automatically as
 
    #+END_SRC
 
-   Below is the =file-list-table=.
-
-   #+RESULTS: create-file-list-table
-   :RESULTS:
-
-   #+NAME: file-list-table
-   | Files      |
-   |------------|
-   | .gitignore |
-   | LICENSE    |
-   | README.org |
-
-   :END:
-
    #+BEGIN_QUOTE
-     *Note:* Using the ~#+NAME:~ syntax will allow table data or the results from a =src= block to be used as input for other steps in this workflow.
+     *Note:* Using the ~#+NAME:~ syntax will allow table data or the results from a =src= block to be used as input for an automated workflow if available.
    #+END_QUOTE
 
-** Create =src= block to process the list of files into an =org-mode= outline
+** Create dedicated =src= block for each file in the list of files under a =org-mode= header as needed.
+
+*** Repeat the workflow below for each file in the list of files
+
+1. Create a dedicated parent heading (Optional)
+
+   In some uses cases, grouping multiple project files under a dedicated heading will improve the readability and allow readers to quickly navigate to a specific group of files. 
+
+   - If the dedicated parent heading is needed, then:
+
+     - Validate the dedicated heading exists. 
+
+       - Create the dedicated heading if the heading does not exist.
+
+     - Navigate to the section directly under dedicated heading.
+
+2. Create dedicated subheading for each filename (Optional) 
+
+   In some uses cases, providing a dedicated subheading will improve the readability and allow readers to quickly navigate to a specific filename. 
+
+   - If a dedicated subheading is provided, then:
+
+     - Validate the dedicated subheading exists. 
+
+       - Create the dedicated subheading if the subheading does not exist.
+
+     - Navigate to the section directly under dedicated subheading.
+
+3. Create a dedicated =src= block for the file.
+
+   The dedicated =src= block should implement the following syntax:
+
+   - Assigned human readible name.  
+
+     For example, if the filename was =README.org= then using the filename as the assigned name would be appropriate.
+
+     #+BEGIN_SRC org :exports code :eval never
+       ,#+NAME: README.org
+       # Start of SRC Code Block for README.org file ...
+     #+END_SRC
+
+     #+BEGIN_QUOTE
+       *Note:* The syntax for ~#+NAME:~ does not allow whitespace characters. If the filename contains any whitespaces, e.g. =Updates List.txt=, then assign the block another name, e.g. =updates-list-txt=.
+     #+END_QUOTE
+
+   - Designate a language that is compatible with the contents of the file.
+
+     For example:
+
+     - If the file is a source code file, designate the lanuage of code block by file extension or type, i.e. =.rb= \rightarrow ruby, =.el= \rightarrow elisp, =.sh= \rightarrow shell, etc\dots  
+
+     - If the file is a text file, designate =org= or =css= as the language of the code block.
+
+   - Add the ~:tangle~ header with the path to the file, e.g. =README.org=, to the headers of the =src= block.
+
+     #+BEGIN_SRC org :exports code :eval never 
+       ,#+BEGIN_SRC org :tangle README.org 
+         Contents of README.org file will go here ...
+       ,#+END_SRC
+     #+END_SRC
+
+*** Workflow Automation                                          :noexport:
 
 For this example, we'll use a named =src= block written in =elisp=. In practice, I encourage you to use the language you prefer. To date, there are over 30 supported programming languages.
 
@@ -86,74 +133,13 @@ For this example, we'll use a named =src= block written in =elisp=. In practice,
 
 :END:
 
-*** Code Walk-through
+- Code Functionality ::
 
-1. Create a dedicated parent heading (Optional)
+ - If the =src= block is empty, insert the contents of the file into the block. 
 
-   In some uses cases, grouping multiple project files under a dedicated heading will improve the readability and allow readers to quickly navigate to a specific group of files. 
-
-   - If the dedicated parent heading is provided, the code should:
-
-     - Validate the dedicated heading exists. 
-
-       - Create the dedicated heading if the heading does not exist.
-
-     - Navigate to the section directly under dedicated heading.
-
-2. Create dedicated subheading for each filename (Optional) 
-
-   In some uses cases, providing a dedicated subheading will improve the readability and allow readers to quickly navigate to a specific filename. 
-
-   - If a dedicated subheading is provided, the code should:
-
-     - Validate the dedicated subheading exists. 
-
-       - Create the dedicated subheading if the subheading does not exist.
-
-     - Navigate to the section directly under dedicated subheading.
-
-3. Create a dedicated =src= block for a file.
-
-   The code for creating a dedicated =src= block should implement the following:
-   
-   - Syntax ::
-
-     - Assigned human readible name.  
-
-       For example, if the filename was =README.org= then using the filename as the assigned name would be appropriate.
-
-       #+BEGIN_SRC org :exports code :eval never
-         ,#+NAME: README.org
-         # Start of SRC Code Block ...
-       #+END_SRC
-
-       #+BEGIN_QUOTE
-         *Note:* The syntax for ~#+NAME:~ does not allow whitespace characters. If the filename contains any whitespaces, e.g. =Updates List.txt=, then assign the block another name, e.g. =updates-list-txt=.
-       #+END_QUOTE
-
-     - Designate a language that is compatible with the contents of the file.
-
-       For example:
-
-       - If the file is a source code file, designate the lanuage of code block by file extension or type, i.e. =.rb= \rightarrow ruby, =.el= \rightarrow elisp, =.sh= \rightarrow shell, etc\dots  
-
-       - If the file is a text file, designate =org= or =css= as the language of the code block.
-
-     - Add the ~:tangle~ header with the path to the file, e.g. =README.org=, to the headers of the =src= block.
-
-       #+BEGIN_SRC org :exports code 
-         ,#+BEGIN_SRC org :tangle README.org 
-           Contents of README.org file go here\dots
-         ,#+END_SRC
-       #+END_SRC
-
-   - Functionality ::
-
-    - If the =src= block is empty, insert the contents of the file into the block. 
-
-      #+BEGIN_QUOTE
-        *Note:* The contents of the file should be escaped as specified in the [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]] specification.
-      #+END_QUOTE
+   #+BEGIN_QUOTE
+     *Note:* The contents of the file should be escaped as specified in the [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]] specification.
+   #+END_QUOTE
 
 * Export Settings                                                  :noexport:
 
