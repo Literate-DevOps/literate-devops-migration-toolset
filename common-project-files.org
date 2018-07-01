@@ -23,7 +23,7 @@ Use this file to manage the files listed in the table below:
 #+NAME: readme-file
 #+BEGIN_SRC org :eval never :exports code  :tangle README.org
   ,* Literate DevOps Migration Toolset
-  Literate DevOps Migration Toolset provides utilities and documentation to facilitate migrating projects over to the Literate Programing paradigm provided by =org-mode=. 
+  Literate DevOps Migration Toolset provides utilities and documentation to facilitate migrating projects over to the Literate Programing paradigm compatible with =org-mode=. 
   - [[file:generic-file-migration-workflow.org][Generic Workflow for Migrating Files into org-mode Outline]]
   - [[file:file-migration-workarounds.org][File Migration Workarounds]]
 #+END_SRC
