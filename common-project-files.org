@@ -732,9 +732,9 @@ Use this file to manage the files listed in the table below:
 
 #+END_SRC
 
-#
+# 
 # Workaround for LICENSE formatting issue when using tangle
-#
+# 
 
 #+BEGIN_SRC org :exports none :noweb yes :tangle LICENSE~
   <<license-file()>>
