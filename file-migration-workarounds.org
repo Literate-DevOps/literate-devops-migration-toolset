@@ -1,0 +1,89 @@
+#+TITLE: File Migration Workarounds
+
+* Issue - After tangling file, leading whitespaces are removed from first line of file.
+
+#+BEGIN_QUOTE
+  *Note:* This is probably a bug in =org-mode=.
+#+END_QUOTE
+
+** Symptoms
+
+After tangling file, leading whitespaces are removed from first line of file.  
+
+e.g.  
+
+ - Contents of file before tangling
+
+   #+BEGIN_EXAMPLE
+                         GNU GENERAL PUBLIC LICENSE
+                            Version 3, 29 June 2007
+
+      Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+   #+END_EXAMPLE
+
+ - Contents of file after tangling
+
+   #+BEGIN_EXAMPLE
+     GNU GENERAL PUBLIC LICENSE
+                            Version 3, 29 June 2007
+
+      Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+   #+END_EXAMPLE
+
+** Workaround 
+
+1. Replace the ~:tangle~ header with ~:file~ header syntax.
+
+   - Before
+
+       #+BEGIN_SRC org :eval never :exports code 
+         ,#+NAME: license-file
+         ,#+BEGIN_SRC org :tangle LICENSE
+           File content goes here ...
+         ,#+END_SRC
+       #+END_SRC
+
+   - After
+
+       #+BEGIN_SRC org :eval never :exports code 
+         ,#+NAME: license-file
+         ,#+BEGIN_SRC org :file LICENSE
+           File content goes here ...
+         ,#+END_SRC
+       #+END_SRC
+
+2. Evaluate updated =src= block.
+
+3. Validate that leading whitespaces are retained on first line of file 
+
+   - Contents of file before updating to ~:file~ header.
+
+     #+BEGIN_EXAMPLE
+       GNU GENERAL PUBLIC LICENSE
+                              Version 3, 29 June 2007
+
+        Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+     #+END_EXAMPLE
+
+   - Contents of file after updating to ~:file~ header.
+
+     #+BEGIN_EXAMPLE
+                           GNU GENERAL PUBLIC LICENSE
+                              Version 3, 29 June 2007
+
+        Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+     #+END_EXAMPLE
+
+4. Create anonymous =src= with ~:tangle~ and ~:noweb~ headers to evaluate the named =src= block using noweb syntax during tangle (Optional).
+
+   In this example, the name assigned to =src= block is =license-file=.
+
+   #+BEGIN_SRC org :exports code 
+     ,#+BEGIN_SRC org :noweb yes :tangle .tangle-workaround~
+       <<license-file()>>
+     ,#+END_SRC
+   #+END_SRC
+
+   #+BEGIN_QUOTE
+     *Note:* The anonymous block, in this example, will tangle to a filename that will be automatically ignored by version control.
+   #+END_QUOTE
