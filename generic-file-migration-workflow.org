@@ -4,11 +4,11 @@
 
 Many development tools provide code generation utilities for quickly creating the files and directories used by developers. This document will provide a generic workflow to migrate the existing files into an =org-mode= outline where the contents of the external files will be maintained using the Literate Programming paradigm.
 
-* Workflow
+* Migration Workflow
 
 ** Create a dedicated =org-mode= file
 
-For this example, let's use the current file as the dedicated =org-mode= file.
+For this example, let's use the [[common-project-files.org]] as the dedicated =org-mode= file.
 
 ** Create a list of files that will migrated into dedicated =org-mode= file
 
@@ -21,9 +21,9 @@ The list of files should be added as a named table or generated automatically as
       ,#+NAME: file-list-table
       | Files      |
       |------------|
+      | README.org |
       | .gitignore |
       | LICENSE    |
-      | README.org |
    #+END_SRC
 
    #+BEGIN_QUOTE
@@ -32,7 +32,7 @@ The list of files should be added as a named table or generated automatically as
 
 ** Create dedicated =src= block for each file in the list of files under a =org-mode= header as needed.
 
-*** Repeat the workflow below for each file in the list of files
+*** Repeat the workflow below for each file
 
 1. Create a dedicated parent heading (Optional)
 
@@ -87,11 +87,30 @@ The list of files should be added as a named table or generated automatically as
 
      #+BEGIN_SRC org :exports code :eval never 
        ,#+BEGIN_SRC org :tangle README.org 
+       ,#+END_SRC
+     #+END_SRC
+
+4. Open the =src= block using ~C-c '~ which invokes ~org-edit-special~ function.
+
+5. Insert the file contents into the =src= block using ~C-x i~ key chord which invokes the ~insert-file~ function.
+
+6. Close the =src= block using ~C-c '~ which invokes ~org-edit-special~ function.
+
+     #+BEGIN_SRC org :exports code :eval never 
+       ,#+BEGIN_SRC org :tangle README.org 
          Contents of README.org file will go here ...
        ,#+END_SRC
      #+END_SRC
 
-*** Workflow Automation                                          :noexport:
+7. Confirm the original file, e.g. =README.org=, is backed up in version control. 
+
+8. Tangle the =src= block contents into the original file using ~C-c~ ~C-v~ ~t~ which invokes the ~org-babel-tangle~ function.
+
+9. Use version control to validate that the contents original are unchanged.
+
+   If the contents of the original file are not the same, troubleshoot the migration steps. The most common reason is that a blank line was unintentionally added or deleted while inserting the file contents into the =src= block.   
+
+*** Migration Workflow Automation                                :noexport:
 
 For this example, we'll use a named =src= block written in =elisp=. In practice, I encourage you to use the language you prefer. To date, there are over 30 supported programming languages.
 
