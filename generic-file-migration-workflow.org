@@ -118,7 +118,7 @@ The list of files should be added as a named table or generated automatically as
 
 For this example, we'll use a named =src= block written in =elisp=. In practice, I encourage you to use the language you prefer. To date, there are over 30 supported programming languages.
 
-1. Evaluate the elisp code to define the ~ldomt/create-named-src-block~ and ~ldomt/migrate-file-list-into-src-blocks~ functions.
+1. Evaluate the elisp example code below to define the ~ldomt/create-named-src-block~ and ~ldomt/migrate-file-list-into-src-blocks~ functions.
 
    #+NAME: ldomt-code
    #+BEGIN_SRC elisp
@@ -195,7 +195,6 @@ For this example, we'll use a named =src= block written in =elisp=. In practice,
        - [[file:generic-file-migration-workflow.org][Generic Workflow for Migrating Files into org-mode Outline]]
        - [[file:file-migration-workarounds.org][File Migration Workarounds]]
      ,#+END_SRC
-
    #+END_SRC
 
 7. Confirm the original file, e.g. =My File.org=, is backed up in version control. 
