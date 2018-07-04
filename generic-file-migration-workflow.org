@@ -32,7 +32,9 @@ The list of files should be added as a named table or generated automatically as
 
 ** Create dedicated =src= block for each file in the list of files under a =org-mode= heading as needed.
 
-*** Repeat the workflow below for each file
+*** Manual Migration Workflow Example
+
+**** Repeat the manual workflow below for each file
 
 1. Create a dedicated parent heading (Optional)
 
