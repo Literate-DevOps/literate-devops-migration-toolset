@@ -114,52 +114,95 @@ The list of files should be added as a named table or generated automatically as
 
    If the cause is not obvious, please read the [[file:file-migration-workarounds.org][File Migration Workarounds]] before submitting an issue.  
 
-*** Migration Workflow Automation                                :noexport:
+*** Automated Migration Workflow Example
 
 For this example, we'll use a named =src= block written in =elisp=. In practice, I encourage you to use the language you prefer. To date, there are over 30 supported programming languages.
 
-#+BEGIN_SRC org :exports code :results drawer replace :eval never 
+1. Evaluate the elisp code to define the ~ldomt/create-named-src-block~ and ~ldomt/migrate-file-list-into-src-blocks~ functions.
 
-  ,#+NAME: process-files-into-org-syntax
-  ,#+BEGIN_SRC elisp :var files=file-list-table
-    files
-  ,#+END_SRC
+   #+NAME: ldomt-code
+   #+BEGIN_SRC elisp
+     (defun ldomt/create-named-src-block (name language parameters value)
+       "Create org-mode SRC block using org-element API
+        ;;(ldomt/create-named-src-block \"README.org\" \"org\" (format \":tangle \\\"%s\\\"\" \"README.org\")  \"* Heading 1\\n** Heading 2\\n**Heading 3\\n\" )
+       "
+       (org-element-interpret-data `(src-block (:language ,language :switches nil :parameters ,parameters  :begin nil :end nil :number-lines nil :preserve-indent nil :retain-labels t :use-labels t :label-fmt nil :value ,value :post-blank 0 :post-affiliated 25 :name ,name :parent nil)))
+       )
 
 
-#+END_SRC
+     (defun ldomt/migrate-file-list-into-src-blocks (files-list)
+       "Process list of files into org-mode syntax
+        ;; (ldomt/migrate-file-list-into-src-blocks files)
+       "
+       (let* ((results '())
+              (name "")
+              (language "")
+              (parameters "")
+              (value "")
+              (src-block "")
+              (heading-format "\n* =%s=\n")
+              (heading "")
+              )
+         (dolist (filename files-list)
+           (setq file-name (car filename))
+           ;; Create safe name for src block
+           (setq name (downcase (replace-regexp-in-string "[^[:word:].]" "-" file-name)))
+           (setq language "org")
+           (setq parameters (format ":tangle \"%s\"" file-name))
+           (setq value (with-temp-buffer
+                         (insert-file file-name)
+                         (buffer-substring (point-min) (point-max))
+                         ))
+           (setq src-block (ldomt/create-named-src-block name language parameters value))
+           (setq heading (format heading-format file-name))
+           (setq results (append results `((,heading) (,src-block))))
+           )
+         (mapconcat 'car results "\n"))
+       )
+   #+END_SRC
 
-#+RESULTS:
-:RESULTS:
+   #+RESULTS: ldomt-code
+   : ldomt/migrate-file-list-into-src-blocks
 
-#+NAME: ldo/process-files-into-org-syntax
-#+BEGIN_SRC elisp :var files=file-list-table :results replace output 
-  (defun ldo/process-files-into-org-syntax (files-list)
-    "Process list of files into org-mode syntax"
-    (dolist (filename files-list)
-      (print (format "%s" (car filename)))
-     )
-    )
+2. Add a file to the ~files-list-table~ table.
 
-  (process-files-into-org-syntax files)
-#+END_SRC
+   #+BEGIN_SRC org :exports code 
+     ,#+NAME: files-list-table
+     | File Name   |
+     |-------------|
+     | My File.org |
+   #+END_SRC
 
-#+RESULTS: ldo/process-files-into-org-syntax
-: 
-: ".gitignore"
-: 
-: "LICENSE"
-: 
-: "README.org"
+3. Create an anonymous =src= block that passes the table values as a parameter, i.e. ~:var files=files-list-table~, and set the ~:results~ header to =raw=.
 
-:END:
+   #+BEGIN_SRC org :exports code 
+     ,#+BEGIN_SRC elisp  :var files=files-list-table :results raw  
+       (ldomt/migrate-file-list-into-src-blocks files)
+     ,#+END_SRC
+   #+END_SRC
 
-- Code Functionality ::
+4. Evaluate the anonymous =src= block using ~C-c C-c~ and the external file will be inserted into the buffer below the anonymous block. Below are the example results:
 
- - If the =src= block is empty, insert the contents of the file into the block. 
+   #+BEGIN_SRC org :exports code 
+     ,#+RESULTS:
 
-   #+BEGIN_QUOTE
-     *Note:* The contents of the file should be escaped as specified in the [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]] specification.
-   #+END_QUOTE
+     ,* =My File.org=
+
+     ,#+NAME: my-file.org
+     ,#+BEGIN_SRC org :tangle "My File.org"
+       ,,* Literate DevOps Migration Toolset
+       Literate DevOps Migration Toolset provides utilities and documentation to facilitate migrating projects over to the Literate Programing paradigm compatible with =org-mode=. 
+       - [[file:generic-file-migration-workflow.org][Generic Workflow for Migrating Files into org-mode Outline]]
+       - [[file:file-migration-workarounds.org][File Migration Workarounds]]
+     ,#+END_SRC
+
+   #+END_SRC
+
+7. Confirm the original file, e.g. =My File.org=, is backed up in version control. 
+
+8. Tangle the contents of the new =src= block into the original file using ~C-c~ ~C-v~ ~t~.
+
+9. Use version control to validate that the contents original are unchanged.
 
 * Export Settings                                                  :noexport:
 
