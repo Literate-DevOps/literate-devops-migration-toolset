@@ -223,3 +223,10 @@ For this example, we'll use a named =src= block written in =elisp=. In practice,
 #+EXPORT_EXCLUDE_TAGS: noexport
 
 
+* Versions used for Source Code Evaluation
+
+All source code examples embedded in this file were successfully evaluated using the software versions listed below:
+
+| *emacs version:*    | GNU Emacs 25.3.1 |
+| *org-mode version:* |           9.1.13 |
+#+TBLFM: @1$2='(format "%s" (substring (version) 0 (string-match-p (regexp-quote "(") (version)))))::@2$2='(org-version)
