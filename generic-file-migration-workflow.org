@@ -14,7 +14,7 @@ For this example, let's use [[file:common-project-files.org][common-project-file
 
 The list of files should be added as a named table or generated automatically as results from a named code block.
 
-  - For example, the org syntax for a table named =file-list-table= which contains =.gitignore=, =LICENSE=, and =README.org=.
+  - For example, the example below shows the org syntax for a table named =file-list-table= which contains =.gitignore=, =LICENSE=, and =README.org=.
     
     #+NAME: create-file-list-table
     #+BEGIN_SRC org :exports code :results drawer replace 
@@ -38,27 +38,27 @@ The list of files should be added as a named table or generated automatically as
 
 1. Create a dedicated parent heading (Optional)
 
-   In some uses cases, grouping multiple project files under a dedicated heading will improve the readability and allow readers to quickly navigate to a specific group of files. 
+   In some use-cases, grouping multiple project files under a dedicated heading will improve the readability and allow readers to quickly navigate to a specific group of files. 
 
    - If the dedicated parent heading is needed, then:
 
-     - Validate the dedicated heading exists. 
+     1. Validate the dedicated heading exists. 
 
-       - Create the dedicated heading if the heading does not exist.
+	- Create the dedicated heading if the heading does not exist.
 
-     - Navigate to the section directly under dedicated heading.
+     2. Navigate to the section directly under dedicated heading.
 
 2. Create dedicated subheading for each filename (Optional) 
 
-   In some uses cases, providing a dedicated subheading will improve the readability and allow readers to quickly navigate to a specific filename. 
+   In some use-cases, providing a dedicated subheading will improve the readability and allow readers to quickly navigate to a specific filename. 
 
    - If a dedicated subheading is provided, then:
 
-     - Validate the dedicated subheading exists. 
+     1. Validate the dedicated subheading exists. 
 
-       - Create the dedicated subheading if the subheading does not exist.
+	- Create the dedicated subheading if the subheading does not exist.
 
-     - Navigate to the section directly under dedicated subheading.
+     2. Navigate to the section directly under dedicated subheading.
 
 3. Create a dedicated =src= block for the file.
 
@@ -100,7 +100,7 @@ The list of files should be added as a named table or generated automatically as
 
      #+BEGIN_SRC org :exports code :eval never 
        ,#+BEGIN_SRC org :tangle README.org 
-         Contents of README.org file will go here ...
+         Contents of the README.org file will go here between lines ~#+BEGIN_SRC~ and ~#+END_SRC~ ...
        ,#+END_SRC
      #+END_SRC
 
@@ -121,7 +121,7 @@ For this example, we'll use a named =src= block written in =elisp=. In practice,
 1. Evaluate the elisp example code below to define the ~ldomt/create-named-src-block~ and ~ldomt/migrate-file-list-into-src-blocks~ functions.
 
    #+NAME: ldomt-code
-   #+BEGIN_SRC elisp
+   #+BEGIN_SRC elisp :exports code 
      (defun ldomt/create-named-src-block (name language parameters value)
        "Create org-mode SRC block using org-element API
         ;;(ldomt/create-named-src-block \"README.org\" \"org\" (format \":tangle \\\"%s\\\"\" \"README.org\")  \"* Heading 1\\n** Heading 2\\n**Heading 3\\n\" )
@@ -164,7 +164,7 @@ For this example, we'll use a named =src= block written in =elisp=. In practice,
    #+RESULTS: ldomt-code
    : ldomt/migrate-file-list-into-src-blocks
 
-2. Add a file to the ~files-list-table~ table.
+2. Add a filename to the ~files-list-table~ table.
 
    #+BEGIN_SRC org :exports code 
      ,#+NAME: files-list-table
@@ -221,7 +221,6 @@ For this example, we'll use a named =src= block written in =elisp=. In practice,
 
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-
 
 * Versions used for Source Code Evaluation
 
