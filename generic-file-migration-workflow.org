@@ -14,7 +14,7 @@ For this example, let's use [[file:common-project-files.org][common-project-file
 
 The list of files should be added as a named table or generated automatically as results from a named code block.
 
-  - For example, the example below shows the org syntax for a table named =file-list-table= which contains =.gitignore=, =LICENSE=, and =README.org=.
+  - For example, the example below shows the org syntax[fn:2] for a table named =file-list-table= which contains =.gitignore=, =LICENSE=, and =README.org=.
     
     #+NAME: create-file-list-table
     #+BEGIN_SRC org :exports code :results drawer replace 
@@ -231,5 +231,7 @@ All source code examples embedded in this file were successfully evaluated using
 #+TBLFM: @1$2='(format "%s" (substring (version) 0 (string-match-p (regexp-quote "(") (version)))))::@2$2='(org-version)
 
 * Footnotes
+
+[fn:2] [[https://orgmode.org/manual/Images-and-tables.html#index-_0023_002bNAME-1]]
 
 [fn:1] [[http://www.literateprogramming.com/knuthweb.pdf]]
