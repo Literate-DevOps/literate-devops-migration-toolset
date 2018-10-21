@@ -27,7 +27,7 @@ The list of files should be added as a named table or generated automatically as
    #+END_SRC
 
    #+BEGIN_QUOTE
-     *Note:* Using the ~#+NAME:~ syntax will allow table data or the results from a =src= block to be used as input for an automated workflow if available.
+     *Note:* Using the ~#+NAME:~ syntax[fn:2] will allow table data or the results from a =src= block to be used as input for an automated workflow if available.
    #+END_QUOTE
 
 ** Create dedicated =src= block for each file in the list of files under a =org-mode= heading as needed.
@@ -232,6 +232,7 @@ All source code examples embedded in this file were successfully evaluated using
 
 * Footnotes
 
+[fn:1] [[http://www.literateprogramming.com/knuthweb.pdf]]
+
 [fn:2] [[https://orgmode.org/manual/Images-and-tables.html#index-_0023_002bNAME-1]]
 
-[fn:1] [[http://www.literateprogramming.com/knuthweb.pdf]]
