@@ -2,7 +2,7 @@
 
 * Summary
 
-Many development tools provide code generation utilities for quickly creating the files and directories used by developers. This document will provide a generic workflow to migrate the existing files into an =org-mode= outline where the contents of the external files will be maintained using the Literate Programming paradigm.
+Many development tools provide code generation utilities for quickly creating the files and directories used by developers. This document will provide a generic workflow to migrate the existing files into an =org-mode= outline where the contents of the external files will be maintained using the [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]][fn:1] paradigm.
 
 * Migration Workflow
 
@@ -229,3 +229,7 @@ All source code examples embedded in this file were successfully evaluated using
 | *emacs version:*    | GNU Emacs 25.3.1 |
 | *org-mode version:* |           9.1.13 |
 #+TBLFM: @1$2='(format "%s" (substring (version) 0 (string-match-p (regexp-quote "(") (version)))))::@2$2='(org-version)
+
+* Footnotes
+
+[fn:1] [[http://www.literateprogramming.com/knuthweb.pdf]]
